@@ -50,7 +50,7 @@ class WP_Turbo_Plugin
         
         add_action('init', function (){
             add_feed('turbo', function (){
-                load_template(plugin_dir_path( __FILE__ ) . '/template.php');
+                load_template(realpath(plugin_dir_path( __FILE__ ) . '/template.php'));
             });
         });
     }
