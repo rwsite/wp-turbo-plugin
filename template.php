@@ -3,8 +3,10 @@
  * Template Name: Yandex Turbo RSS
  */
 
+/** @var $post WP_Post */
 global $post;
 
+/** @var WP_Post[] $posts */
 $posts = get_posts([
                        'numberposts'    => -1,
                        'posts_per_page' => get_option('turbo_options', ['per_page' => '500'])['per_page'],
@@ -48,7 +50,7 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
             ?>
             <item turbo="true">
                 <title><?php echo $post->post_title; ?></title>
-                <link><?php echo $post->guid; ?></link>
+                <link><?php echo get_post_permalink($post); ?></link>
                 <author><?php the_author_meta('display_name', $post->post_author); ?></author>
                 <category><?php the_category(', ', 'single', $post->ID); ?></category>
                 <pubDate><?php echo get_feed_build_date( 'D, d M Y H:i:s +0000' ); ?></pubDate>

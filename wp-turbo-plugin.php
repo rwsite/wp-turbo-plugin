@@ -64,12 +64,12 @@ class WP_Turbo_Plugin
     public function admin_menu()
     {
         add_submenu_page('options-general.php',
-     'Настройки "Yandex Turbo"',
-     'Yandex Turbo',
-     'manage_options',
-    'turbo',
+            'Настройки "Yandex Turbo"',
+            'Yandex Turbo',
+            'manage_options',
+            'turbo',
             function () {
-                load_template($this->dir . '/admin.php', true, []);
+                load_template($this->dir.'/admin.php', true, []);
             }
         );
     }
@@ -80,19 +80,26 @@ class WP_Turbo_Plugin
         }
         return $actions;
     }
-    
-    public function settings()
+
+    public function settings():void
     {
-        register_setting('turbo_options','turbo_options', [$this, 'turbo_options_validate']);
-        
-        add_settings_section('turbo_counters','Введите ID счетчиков, для установки их в RSS канал.','','turbo');
-        add_settings_field('turbo_metrika_code','ID Яндекс Метрики:',[$this, 'turbo_metrika_field'],'turbo','turbo_counters');
-        add_settings_field('turbo_google_code','ID Google Analytics:', [$this, 'turbo_google_field'],'turbo','turbo_counters');
-        
-        add_settings_section('turbo_related','Блок со ссылками на другие новости источника: '.htmlspecialchars('<yandex:related>'),
-                             [$this, 'turbo_related_html'],'turbo');
-        add_settings_field('turbo_related_html','HTML код (до 10 ссылок):',[$this, 'turbo_related_field'],'turbo','turbo_related');
-        add_settings_field('turbo_per_page','Записей на страницу:',[$this, 'turbo_per_page'],'turbo','turbo_related');
+        register_setting('turbo_options', 'turbo_options',
+            [$this, 'turbo_options_validate']);
+
+        add_settings_section('turbo_counters','Введите ID счетчиков, для установки их в RSS канал.', '', 'turbo');
+        add_settings_field('turbo_metrika_code', 'ID Яндекс Метрики:',
+            [$this, 'turbo_metrika_field'], 'turbo', 'turbo_counters');
+        add_settings_field('turbo_google_code', 'ID Google Analytics:',
+            [$this, 'turbo_google_field'], 'turbo', 'turbo_counters');
+
+        add_settings_section('turbo_related',
+            'Блок со ссылками на другие новости источника: '
+            .htmlspecialchars('<yandex:related>'),
+            [$this, 'turbo_related_html'], 'turbo');
+        add_settings_field('turbo_related_html', 'HTML код (до 10 ссылок):',
+            [$this, 'turbo_related_field'], 'turbo', 'turbo_related');
+        add_settings_field('turbo_per_page', 'Записей на страницу:',
+            [$this, 'turbo_per_page'], 'turbo', 'turbo_related');
     }
     
     public function turbo_options_validate($input)
