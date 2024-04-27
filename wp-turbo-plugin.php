@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Yandex turbo feed
  * Description: Simple Yandex turbo feed
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: turbo
  * Domain Path: /languages
  * Author: Aleksey Tikhomirov
