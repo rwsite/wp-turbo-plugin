@@ -8,10 +8,10 @@ global $post;
 
 /** @var WP_Post[] $posts */
 $posts = get_posts([
-                       'numberposts'    => -1,
-                       'posts_per_page' => get_option('turbo_options', ['per_page' => '500'])['per_page'],
-                       'paged'          => get_query_var('page'),
-                   ]);
+    'numberposts'    => -1,
+    'posts_per_page' => get_option('turbo_options',['per_page' => '500'])['per_page'],
+    'paged'          => get_query_var('page'),
+]);
 
 header('Content-Type: ' . feed_content_type('rss-http') . '; charset=' . get_option('blog_charset'), true);
 echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
@@ -45,20 +45,24 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?' . '>';
         echo (isset($options['turbo_rambler_code'])) ? '<turbo:analytics type="Rambler" id="' . $options['turbo_rambler_code'] . '"></turbo:analytics>' : '';//*/
         
         $rlinks = $options['turbo_related_html'] ?? '';
-        
-        foreach ($posts as $post):
+        $tmp = $post;
+
+        foreach ($posts as $_post):
+            setup_postdata($_post);
+            the_post();
             ?>
             <item turbo="true">
-                <title><?php echo $post->post_title; ?></title>
-                <link><?php echo get_post_permalink($post); ?></link>
+                <title><?php echo sanitize_text_field(get_the_title()); ?></title>
+                <link><?php echo get_permalink() ?></link>
                 <author><?php the_author_meta('display_name', $post->post_author); ?></author>
                 <category><?php the_category(', ', 'single', $post->ID); ?></category>
                 <pubDate><?php echo get_feed_build_date( 'D, d M Y H:i:s +0000' ); ?></pubDate>
                 <turbo:content><![CDATA[<?php the_content(); ?>]]></turbo:content>
-                <?php echo !empty($rlinks) ? '<yandex:related>' . $rlinks . '</yandex:related>' : '' ?>
+                <?php echo !empty($rlinks) ? '<yandex:related>' . $rlinks . '</yandex:related>' : ''; ?>
             </item>
         <?php
         endforeach;
+        wp_reset_query();
         ?>
     </channel>
 </rss>
