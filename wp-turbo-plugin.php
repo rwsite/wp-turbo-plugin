@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Yandex turbo feed
- * Description: Simple Yandex turbo feed
+ * Description: Simple Yandex turbo feed. WordPress plugin.
  * Version: 1.0.1
  * Text Domain: turbo
  * Domain Path: /languages

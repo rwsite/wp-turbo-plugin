@@ -1,0 +1,14 @@
+{
+  "name": "rwsite/wp-turbo-plugin",
+  "description": "Simple Yandex turbo feed. WordPress plugin.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Aleksei Tikhomirov",
+      "email": "alex@rwsite.ru"
+    }
+  ],
+  "require": {
+  }
+}
