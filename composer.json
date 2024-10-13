@@ -3,6 +3,7 @@
   "description": "Simple Yandex turbo feed. WordPress plugin.",
   "minimum-stability": "stable",
   "license": "proprietary",
+  "type": "wordpress-plugin",
   "authors": [
     {
       "name": "Aleksei Tikhomirov",
